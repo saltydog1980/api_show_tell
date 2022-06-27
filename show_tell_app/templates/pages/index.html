@@ -1,0 +1,47 @@
+{% extends "pages/layout.html" %}
+{% block content %}
+<!-- Carousel wrapper -->
+<div id="carouselMaterialStyle" class="carousel slide" data-mdb-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+    {% comment %} <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button> {% endcomment %}
+    {% for i in giphy_types %}
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="{{forloop.counter0}}" class="active" aria-current="true" aria-label="Slide {{forloop.counter}}"></button>
+    {% endfor %}
+    </div>
+
+    <!-- Inner -->
+    <div class="carousel-inner rounded-5  shadow-4-strong">
+
+    {% for giphy in giphy_types %}
+    {% if forloop.counter0 == 0 %}
+    <!-- Single item -->
+    <div class="carousel-item active">
+        <a href="{% url 'nyan_cat:type' giphy.tag %}"><h1>{{giphy.tagText}}</h1></a>
+        <img src={{giphy.gfycats.0.max5mbGif}} class="d-block"
+        alt={{giphy.tagText}} />
+    </div>
+    {% else %}
+    <div class="carousel-item">
+        <a href="{% url 'nyan_cat:type' giphy.tag %}"><h1>{{giphy.tagText}}</h1></a>
+        <img src={{giphy.gfycats.0.max5mbGif}} class="d-block"
+        alt={{giphy.tagText}} />
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- Carousel wrapper -->
+{% endblock %}
